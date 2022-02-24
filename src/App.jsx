@@ -4,6 +4,7 @@ import Profile from './views/Profile/Profile';
 import Header from './components/Header/Header';
 import Home from './views/Home/Home';
 import './App.css';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
           <Route path="/register">
             <Auth />
           </Route>
-          <Route path="/profile">
+          <PrivateRoute path="/profile">
             <Profile />
-          </Route>
+          </PrivateRoute>
           <Route path="/">
             <Home />
           </Route>
