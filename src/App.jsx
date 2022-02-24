@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Auth from './views/Auth/Auth';
+import LogIn from './views/Auth/LogIn';
+import Register from './views/Auth/Register';
 import Profile from './views/Profile/Profile';
 import Header from './components/Header/Header';
 import Home from './views/Home/Home';
@@ -12,11 +13,11 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/login">
-            <Auth />
-          </Route>
           <Route path="/register">
-            <Auth />
+            <Register />
+          </Route>
+          <Route path="/login">
+            <LogIn />
           </Route>
           <PrivateRoute path="/profile">
             <Profile />

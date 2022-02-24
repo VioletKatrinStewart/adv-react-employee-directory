@@ -19,3 +19,11 @@ export async function deleteProfileByEmail(email) {
   const request = await client.from('profiles').delete().match({ email });
   return parseData(request);
 }
+
+export async function logInUser(email, password) {
+  const { user, error } = await client.auth.signIn({ email, password });
+  if (error) {
+    throw error;
+  }
+  return user;
+}
