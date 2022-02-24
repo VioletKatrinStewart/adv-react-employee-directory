@@ -1,7 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+export default function AuthForm({ isSigningUp, handleAuth }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-export default function AuthForm({ email, password, setEmail, setPassword, handleSubmit }) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleAuth(email, password);
+  }
+
   return (
     <div>
       <form>
@@ -23,9 +30,7 @@ export default function AuthForm({ email, password, setEmail, setPassword, handl
             placeholder="please enter your password"
           />
         </label>
-        <button onClick={handleSubmit}>Log In</button>
-        <p>Need to sign up? Click here</p>
-        <Link to="/register">Register</Link>
+        <button onClick={handleSubmit}>{isSigningUp ? 'Sign Up' : 'Sign In'}</button>
       </form>
     </div>
   );

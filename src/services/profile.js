@@ -20,10 +20,10 @@ export async function deleteProfileByEmail(email) {
   return parseData(request);
 }
 
-export async function logInUser(email, password) {
-  const { user, error } = await client.auth.signIn({ email, password });
-  if (error) {
-    throw error;
-  }
-  return user;
-}
+// export async function logInUser(email, password) {
+//   const { user, error } = await client.auth.signIn({ email, password });
+//   if (error) {
+//     throw error;
+//   }
+//   return user;
+// }

@@ -1,11 +1,11 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import LogIn from './views/Auth/LogIn';
-import Register from './views/Auth/Register';
 import Profile from './views/Profile/Profile';
 import Header from './components/Header/Header';
 import Home from './views/Home/Home';
+import Auth from './views/Auth/Auth';
 import './App.css';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import ConfirmEmail from './views/ConfirmEmail/ConfirmEmail';
 
 function App() {
   return (
@@ -14,10 +14,13 @@ function App() {
         <Header />
         <Switch>
           <Route path="/register">
-            <Register />
+            <Auth isSigningUp />
+          </Route>
+          <Route path="/confirm-email">
+            <ConfirmEmail />
           </Route>
           <Route path="/login">
-            <LogIn />
+            <Auth />
           </Route>
           <PrivateRoute path="/profile">
             <Profile />
