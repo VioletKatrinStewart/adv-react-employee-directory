@@ -14,7 +14,7 @@ function App() {
         <Header />
         <Switch>
           <Route path="/register">
-            <Auth isSigningUp />
+            <Auth isSigningUp={true} />
           </Route>
           <Route path="/confirm-email">
             <ConfirmEmail />
