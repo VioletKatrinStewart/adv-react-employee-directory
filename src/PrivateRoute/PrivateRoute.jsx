@@ -4,7 +4,7 @@ import { useUser } from '../Context/UserContext';
 
 export default function PrivateRoute({ children, ...routeProps }) {
   const { user } = useUser();
-  console.log(Boolean(user.email));
+  //   console.log(Boolean(user.email));
   const location = useLocation();
   return (
     <Route {...routeProps}>
