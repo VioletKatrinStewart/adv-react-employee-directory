@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../../Context/UserContext';
 import { signOutUser } from '../../services/user';
 
-export default function AuthButton({ className }) {
+export default function AuthButton() {
   const { user, setUser } = useUser();
 
   return (
