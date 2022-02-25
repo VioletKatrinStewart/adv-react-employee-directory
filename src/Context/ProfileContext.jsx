@@ -1,10 +1,12 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { getProfile } from '../services/profile';
+import { useUser } from './UserContext';
 
 export const ProfileContext = createContext();
 
 const ProfileProvider = ({ children }) => {
   const [profile, setProfile] = useState({});
+  const { user } = useUser();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -16,7 +18,7 @@ const ProfileProvider = ({ children }) => {
       }
     };
     fetchProfile();
-  }, []);
+  }, [user]);
 
   const value = { profile, setProfile };
 

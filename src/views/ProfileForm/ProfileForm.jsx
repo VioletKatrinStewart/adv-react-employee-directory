@@ -1,13 +1,20 @@
-import React from 'react';
-// import { useProfile } from '../../Context/ProfileContext';
+import React, { useEffect } from 'react';
+import { useProfile } from '../../Context/ProfileContext';
 import { useState } from 'react';
 
 export default function ProfileForm() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState({ email });
+  const [email, setEmail] = useState('');
   const [bio, setBio] = useState('');
   const [birthday, setBirthday] = useState('');
-  // const { profile, setProfile } = useProfile();
+  const { profile, setProfile } = useProfile();
+
+  useEffect(() => {
+    setName(profile.name);
+    setEmail(profile.email);
+    setBirthday(profile.birthday);
+    setBio(profile.bio);
+  }, [profile]);
 
   return (
     <div>
@@ -53,3 +60,7 @@ export default function ProfileForm() {
     </div>
   );
 }
+
+//create handle submit function async
+//attatch to form button dont forget prevent default
+//await creating profile and give it values it needs then put in state (set) with those values then useHisory to push user to profile page
