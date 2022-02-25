@@ -9,7 +9,6 @@ export default function AuthButton({ className }) {
     <>
       {user?.email ? (
         <button
-          className={className}
           onClick={async () => {
             await signOutUser();
             setUser({});
@@ -18,7 +17,7 @@ export default function AuthButton({ className }) {
           Sign Out
         </button>
       ) : (
-        <Link to="/login" className={className}>
+        <Link to="/login">
           <button>Sign In</button>
         </Link>
       )}
