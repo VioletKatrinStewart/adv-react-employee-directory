@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useProfile } from '../../Context/ProfileContext';
 import { useState } from 'react';
+import { createProfile } from '../../services/profile';
+import { useHistory } from 'react-router-dom';
 
 export default function ProfileForm() {
   const [name, setName] = useState('');
@@ -8,13 +10,25 @@ export default function ProfileForm() {
   const [bio, setBio] = useState('');
   const [birthday, setBirthday] = useState('');
   const { profile, setProfile } = useProfile();
-
+  const history = useHistory;
   useEffect(() => {
     setName(profile.name);
     setEmail(profile.email);
     setBirthday(profile.birthday);
     setBio(profile.bio);
   }, [profile]);
+
+  const saveForm = async () => {
+    const resp = await createProfile({ name, email, birthday, bio });
+    console.log(resp);
+    setProfile({ name: resp.name, email: resp.email, birthday: resp.birthday, bio: resp.bio });
+    history.push('/profile');
+  };
+
+  function handlSave(e) {
+    e.preventDefault();
+    saveForm(name, email, birthday, bio);
+  }
 
   return (
     <div>
@@ -41,7 +55,7 @@ export default function ProfileForm() {
         <label>
           birthday:
           <input
-            type="text"
+            type="date"
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
             placeholder="please enter your birthday"
@@ -56,6 +70,9 @@ export default function ProfileForm() {
             placeholder="Write a little bit about yourself here"
           />
         </label>
+        <button type="submit" onClick={handlSave}>
+          Save
+        </button>
       </form>
     </div>
   );
