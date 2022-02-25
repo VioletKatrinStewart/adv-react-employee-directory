@@ -3,6 +3,7 @@ import { useProfile } from '../../Context/ProfileContext';
 import { useState } from 'react';
 import { createProfile } from '../../services/profile';
 import { useHistory } from 'react-router-dom';
+import { getProfile } from '../../services/profile';
 
 export default function ProfileForm() {
   const [name, setName] = useState('');
@@ -10,13 +11,22 @@ export default function ProfileForm() {
   const [bio, setBio] = useState('');
   const [birthday, setBirthday] = useState('');
   const { profile, setProfile } = useProfile();
-  const history = useHistory;
+  const history = useHistory();
+
   useEffect(() => {
     setName(profile.name);
     setEmail(profile.email);
     setBirthday(profile.birthday);
     setBio(profile.bio);
   }, [profile]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const resp = await getProfile();
+      setProfile(resp);
+    };
+    fetchData();
+  }, [setProfile]);
 
   const saveForm = async () => {
     const resp = await createProfile({ name, email, birthday, bio });
