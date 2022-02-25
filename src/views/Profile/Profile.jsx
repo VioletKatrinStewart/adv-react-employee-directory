@@ -5,12 +5,12 @@ import { useProfile } from '../../Context/ProfileContext';
 
 export default function Profile() {
   const { profile } = useProfile();
-  console.log(profile);
+  // console.log(profile);
 
   return (
     <div>
       {!profile.name ? (
-        <ProfileForm />
+        <ProfileForm isCreating />
       ) : (
         <>
           <h1>Profile:</h1>
@@ -18,6 +18,7 @@ export default function Profile() {
           <p>Email: {profile.email}</p>
           <p>Birthday: {profile.birthday}</p>
           <p>Bio: {profile.bio}</p>
+
           <Link to="/">Home</Link>
         </>
       )}

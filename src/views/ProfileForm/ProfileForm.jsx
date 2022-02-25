@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useProfile } from '../../Context/ProfileContext';
 import { useState } from 'react';
-import { createProfile } from '../../services/profile';
+import { createProfile, updateProfile } from '../../services/profile';
 import { useHistory } from 'react-router-dom';
 import { getProfile } from '../../services/profile';
 
-export default function ProfileForm() {
+export default function ProfileForm({ isCreating = false }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [bio, setBio] = useState('');
@@ -28,16 +28,27 @@ export default function ProfileForm() {
     fetchData();
   }, [setProfile]);
 
-  const saveForm = async () => {
+  const createForm = async () => {
     const resp = await createProfile({ name, email, birthday, bio });
-    console.log(resp);
+    // console.log(resp);
     setProfile({ name: resp.name, email: resp.email, birthday: resp.birthday, bio: resp.bio });
     history.push('/profile');
   };
 
-  function handlSave(e) {
+  function handleCreate(e) {
     e.preventDefault();
-    saveForm(name, email, birthday, bio);
+    createForm(name, email, birthday, bio);
+  }
+
+  const editForm = async () => {
+    const resp = await updateProfile({ name, email, birthday, bio });
+    setProfile({ name: resp.name, email: resp.email, birthday: resp.birthday, bio: resp.bio });
+    history.push('/profile');
+  };
+
+  function handleEdit(e) {
+    e.preventDefault();
+    editForm(name, email, birthday, bio);
   }
 
   return (
@@ -80,9 +91,8 @@ export default function ProfileForm() {
             placeholder="Write a little bit about yourself here"
           />
         </label>
-        <button type="submit" onClick={handlSave}>
-          Save
-        </button>
+        {isCreating && <button onClick={handleCreate}>Save</button>}
+        {!isCreating && <button onClick={handleEdit}>Save</button>}
       </form>
     </div>
   );
