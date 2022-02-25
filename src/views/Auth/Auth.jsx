@@ -30,7 +30,7 @@ export default function Auth({ isSigningUp = false }) {
     <div>
       <h2>{isSigningUp ? 'Welcome!' : 'Welcome back!'}</h2>
       <br />
-      <AuthForm handleAuth={handleAuth} label={isSigningUp ? 'Sign Up' : 'Sign In'} />
+      <AuthForm handleAuth={handleAuth} isSigningUp={isSigningUp} />
 
       {isSigningUp ? (
         <p>
